@@ -1,0 +1,46 @@
+<div class="container">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-5 mt-5 text-gray-800 text-center">Dashboard</h1>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3"></div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered table-hover text-center"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              <th>Candidate Name</th>
+              <th>DoB</th>
+              <th>Last Updated At</th>
+              <th>Photograph</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let data of resumeData; index as i">
+              <!-- <th scope="row">{{ data.id }}</th> -->
+              <td>{{ data.first | uppercase }} {{ data.last | uppercase }}</td>
+              <td>{{ data.dob | date: " d MMMM y " }}</td>
+              <td>{{ data.date | date: "MMM d, y, h:mm:ss a" }}</td>
+              <td>
+                <img
+                  src="{{ data.url }} "
+                  alt=""
+                  srcset=""
+                  class="img-responsive"
+                  width="100px"
+                  height="100px"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

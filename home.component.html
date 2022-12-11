@@ -1,0 +1,83 @@
+<div class="container responsive">
+  <h1 class="h3 mb-2 mt-5 text-gray-800 text-center">Login Page</h1>
+
+  <div class="card shadow mb-4">
+    <form #loginForm="ngForm" (ngSubmit)="(loginForm)" class="mt-5">
+      <div class="row justify-content-md-center mt-3">
+        <div class="col-md-4 p-auto">
+          <label for="userid" class="form-label text-center"
+            >User ID <sup class="text-danger">*</sup></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            name="email"
+            maxlength="20"
+            [(ngModel)]="email"
+            required
+            (blur)="getUseridValue($event)"
+          />
+          <div class="">
+            <p class="error-message text-danger">{{ erroremail }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-md-center mt-3">
+        <div class="col-md-4">
+          <label for="userid" class="form-label"
+            >Password <sup class="text-danger">*</sup></label
+          >
+          <div class="form-group inner-addon right-addon">
+            <!-- <div class="input-group col-auto mt-2"> -->
+            <input
+              name="password"
+              [(ngModel)]="password"
+              required
+              (blur)="getPasswordValue($event)"
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control pwd-control"
+              id="password-field"
+            />
+            <div>
+              <i
+                alt="show"
+                class="far fa-eye eye-show mt-2"
+                (click)="showPassword = !showPassword"
+                [class.hide]="showPassword"
+              ></i>
+              <i
+                alt="hide"
+                class="far fa-eye-slash eye-hide mt-2"
+                (click)="showPassword = !showPassword"
+                [class.hide]="!showPassword"
+              ></i>
+            </div>
+            <!-- </div> -->
+          </div>
+          <div class="">
+            <p class="error-message text-danger">{{ errorpassword }}</p>
+          </div>
+          <br />
+          <!-- <div class="float-right"> -->
+          <div class="float-right">
+            <button
+              class="btn btn-outline-primary"
+              type="submit"
+              value="login"
+              [disabled]="loginForm.invalid"
+              (click)="login()"
+            >
+              Login
+            </button>
+          </div>
+          <!-- </div> -->
+        </div>
+      </div>
+
+      <br />
+      <div class="row justify-content-md-center ml-5"></div>
+      <br />
+    </form>
+  </div>
+</div>

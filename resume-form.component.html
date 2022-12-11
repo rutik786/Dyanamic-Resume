@@ -1,0 +1,298 @@
+<div class="container responsive">
+  <h1 class="h3 mb-2 mt-5 text-gray-800 text-center">Resume Form</h1>
+
+  <div class="card shadow mb-4">
+    <form #resumeForm="ngForm" (ngSubmit)="(resumeForm)">
+      <div class="row justify-content-md-center mt-3">
+        <div class="col-md-4">
+          <label for="fNAME">First Name <sup class="text-danger">*</sup></label>
+          <input type="text" class="form-control" #FNAME name="Fname" [(ngModel)]="fname" maxlength="30"
+            (blur)="getFname($event)" required />
+          <div class="">
+            <p class="error-message text-danger">{{ errorFname }}</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="LNAME">Last Name <sup class="text-danger">*</sup></label>
+          <input type="text" class="form-control" #LNAME name="lname" [(ngModel)]="lname" maxlength="30"
+            (blur)="getLname($event)" required />
+          <div class="">
+            <p class="error-message text-danger">{{ errorLname }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col-md-4">
+          <label for="DOB">Date of Birth <sup class="text-danger">*</sup></label>
+          <input type="date" class="form-control" #DOB name="dob" [(ngModel)]="dateValue" [max]="date2"
+            (blur)="getdateValue($event)" required />
+          <div class="">
+            <p class="error-message text-danger">{{ errorDate }}</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="validationCustom02">URL of the Image <sup class="text-danger">*</sup></label>
+          <input type="url" class="form-control" name="imageurl" #imgUrl [(ngModel)]="urlValue" (blur)="getUrl($event)"
+            required />
+          <div class="">
+            <p class="error-message text-danger">{{ errorUrl }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col-8">
+          <label for="">About <sup class="text-danger">*</sup></label>
+
+          <textarea class="form-control" #summuary name="summary" maxlength="500" cols="60" rows="3" [(ngModel)]="info"
+            (blur)="getinfo($event)" required></textarea>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center mt-5">
+        <div class="col-sm-2">
+          <span class="align-item-center">Qualification</span>
+        </div>
+        <div class="col-sm-6 mb-2">
+          <!-- Button trigger modal -->
+
+          <button class="btn btn-primary btn-md border-0 float-right" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa-sharp fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-8">
+          <div class="table-responsive">
+            <table class="table table-bordered text-center">
+              <thead>
+                <tr>
+                  <!-- <th scope="col-1">#</th> -->
+                  <th scope="col-1">Degree</th>
+                  <th scope="col-2">Institute</th>
+                  <th scope="col-2">Year</th>
+                  <th scope="col-1">Grade</th>
+                  <th scope="col-2">Remarks</th>
+                  <th scope="col-1">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of Qualify.data1; index as i">
+                  <!-- <th scope="row">{{ data.id }}</th> -->
+                  <td>{{ data.degree | uppercase }}</td>
+                  <td>{{ data.institute | titlecase }}</td>
+                  <td>{{ data.duration | date: "y" }}</td>
+                  <td>{{ data.grade | uppercase }}</td>
+                  <td>{{ data.remarks }}</td>
+                  <td>
+                    <button class="btn btn-outline-danger border-0" (click)="deleteRow(data)">
+                      X
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row justify-content-md-center mt-5">
+        <div class="col-sm-2">
+          <span class="align-item-center">Experience</span>
+        </div>
+        <div class="col-sm-6 mb-2">
+          <!-- Button trigger modal -->
+          <button class="btn btn-primary btn-md border-0 float-right" data-toggle="modal" data-target="#exampleModal2">
+            <i class="fa-sharp fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-8">
+          <div class="table-responsive">
+            <table class="table table-bordered text-center">
+              <thead>
+                <tr>
+                  <!-- <th scope="col-1">#</th> -->
+                  <th scope="col-2">Organization</th>
+                  <th scope="col-2">Role</th>
+                  <th scope="col-2">Year</th>
+                  <th scope="col-2">Remarks</th>
+                  <th scope="col-1">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of expo.data2; index as i">
+                  <!-- <th scope="row">{{ data.id }}</th> -->
+
+                  <td>{{ data.organization | titlecase }}</td>
+                  <td>{{ data.role | titlecase }}</td>
+                  <td>{{ data.duration | date: "y" }}</td>
+                  <td>{{ data.remarks }}</td>
+                  <td>
+                    <button class="btn btn-outline-danger border-0" (click)="deleteItem(data)">
+                      X
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br />
+          <div class="row justify-content-md-center">
+            <button class="btn btn-primary" type="submit" (click)="newSubmit(FNAME.value,LNAME.value,DOB.value,imgUrl.value,summuary.value)"
+              [disabled]="resumeForm.invalid">
+              Submit form
+            </button>
+            <!-- routerLink="/view" -->
+          </div>
+        </div>
+      </div>
+      <br />
+    </form>
+  </div>
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Qualification</h5>
+
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="resetRow()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #modalForm="ngForm" (ngSubmit)="(modalForm)">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Degree <span><sup class="text-danger">*</sup></span></label>
+            <input type="text" #Degree class="form-control" [(ngModel)]="degree" name="degree1"
+              (blur)="getDegree($event)" required />
+            <div class="">
+              <p class="error-message text-danger">{{ errorDegree }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Institute <span><sup class="text-danger">*</sup></span></label>
+            <input type="text" class="form-control" #Institute [(ngModel)]="institute" name="institute1"
+              (blur)="getInstitute($event)" required />
+            <div class="">
+              <p class="error-message text-danger">{{ errorInstitute }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput3">Year <span><sup class="text-danger">*</sup></span></label>&nbsp;
+            <input type="date" #Duration class="form-control" [(ngModel)]="duration" [max]="date2" name="duration1"
+              [min]="dateValue" (blur)="getYear($event)" required />
+            <div class="">
+              <p class="error-message text-danger">{{ errorDuration }}</p>
+            </div>
+          </div>
+          <label for="formGroupExampleInput4">Grade <span><sup class="text-danger">*</sup></span></label>
+          &nbsp;
+          <select class="form-select col-2" aria-label="Default select example" [(ngModel)]="grade" name="grade1" #Grade
+            required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+          </select>
+          <!-- <div class="col-md-7">
+            <span class="error-message-name-message error1">{{
+              errorGrade
+            }}</span>
+          </div> -->
+          <br />
+
+          <div class="form-group">
+            <label for="formGroupExampleInput5">Remarks <span><sup class="text-danger">*</sup></span></label>
+            <input type="text" class="form-control" name="remark1" #Remarks [(ngModel)]="remarks" required />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="resetRow()">
+          Discard
+        </button>
+        <button type="button" class="btn btn-primary" *ngIf="this.Qualify.data1.length <= 6"
+          [disabled]="modalForm.invalid" (click)="
+            addRow(
+              Degree.value,
+              Institute.value,
+              Duration.value,
+              Grade.value,
+              Remarks.value
+            )
+          ">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal2">Experience:</h5>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" (click)="resetItem()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #modal2Form="ngForm" (ngSubmit)="(modal2Form)">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Organization <span><sup class="text-danger">*</sup></span></label>
+            <input type="text" class="form-control" #Organization name="organization2" [(ngModel)]="organization"
+              (blur)="getOrganization($event)" required />
+            <div class="">
+              <p class="error-message text-danger">{{ errorOrganization }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Role <span><sup class="text-danger">*</sup></span></label>
+            <input type="text" name="role2" class="form-control" #Role [(ngModel)]="role" (blur)="getRole($event)"
+              required />
+            <div class="">
+              <p class="error-message text-danger">{{ errorRole }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput3">Year <span><sup class="text-danger">*</sup></span></label>
+            <input type="date" class="form-control" name="duration2" [max]="date2" #Duration [(ngModel)]="duration2"
+              [min]="dateValue" (blur)="getYear2($event)" required />
+            <div class="">
+              <p class="error-message text-danger">{{ errorDuration2 }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="remark">Remarks <span><sup class="text-danger">*</sup></span></label>
+            <input type="text" class="form-control" name="remark2" #Remarks2 [(ngModel)]="remarks2" required />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="resetItem()">
+          Discard
+        </button>
+        <button type="button" class="btn btn-primary" *ngIf="this.expo.data2.length <= 6"
+          [disabled]="modal2Form.invalid" (click)="
+            addItem(
+              Organization.value,
+              Role.value,
+              Duration.value,
+              Remarks2.value
+            )
+          ">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
